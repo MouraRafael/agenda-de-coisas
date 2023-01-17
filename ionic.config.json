@@ -1,0 +1,7 @@
+{
+  "name": "agendadenotas",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
