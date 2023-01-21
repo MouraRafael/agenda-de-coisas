@@ -3,6 +3,7 @@ import { FormControl, FormGroup, FormGroupDirective, Validators } from '@angular
 import { FirebaseService } from '../services/firebase.service';
 import { CorreiosService } from '../services/correios.service';
 import { Endereco } from '../models/endereco.model';
+import { Pessoa } from '../models/pessoa.model';
 
 @Component({
   selector: 'app-registro',
@@ -34,7 +35,7 @@ export class RegistroPage implements OnInit {
         'localidade': new FormControl('',[Validators.required]),
         'bairro': new FormControl('',[Validators.required]),
         'logradouro': new FormControl('',[Validators.required]),
-        'numero': new FormControl('',[Validators.required, Validators.max(5), Validators.min(1)])
+        'numero': new FormControl('',[Validators.required, Validators.maxLength(5), Validators.minLength(1)])
       })
     })
   }
@@ -56,7 +57,19 @@ export class RegistroPage implements OnInit {
 
 
 
-  registra(){}
+  registra(){
+    const pessoa = this.cadastroForm.getRawValue() as Pessoa;
+    this.firebaseService.registraUsuario(pessoa).then(
+      res=>{
+        if(res.user.uid){
+          pessoa.uid = res.user.uid;
+
+          this.firebaseService.cadastra(pessoa)
+        }
+      }
+    );
+
+  }
   verificaUsername(){}
   verificaEmail(){}
 
