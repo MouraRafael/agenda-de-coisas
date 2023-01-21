@@ -59,7 +59,7 @@ export class FirebaseService {
   listar():Observable<Pessoa[]>{
     const pessoasCollection = collection(this.fireStore,NOME_DB);
 
-    return collectionData(pessoasCollection, {idField: 'id'})
+    return collectionData(pessoasCollection, {idField: 'uid'})
     .pipe(
       map(result => result as Pessoa[])
     );
