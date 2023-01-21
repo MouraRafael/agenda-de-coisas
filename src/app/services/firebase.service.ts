@@ -15,34 +15,11 @@ const NOME_DB = 'pessoas';
 })
 export class FirebaseService {
   constructor(
-    private auth: Auth,
+
     private fireStore: Firestore
   ) {}
 
-  registraUsuario(usuario: Pessoa){
-    return  createUserWithEmailAndPassword(
-        this.auth,
-        usuario.email,
-        usuario.senha
-      )
-  }
 
-  async login(usuario: Pessoa) {
-    try {
-      const user = signInWithEmailAndPassword(
-        this.auth,
-        usuario.email,
-        usuario.senha
-      );
-      return user;
-    } catch (e) {
-      return null;
-    }
-  }
-
-  logout() {
-    return signOut(this.auth);
-  }
 
 
 

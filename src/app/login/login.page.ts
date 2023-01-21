@@ -1,6 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, FormGroupDirective, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AuthService } from '../services/auth.service';
+import { Pessoa } from '../models/pessoa.model';
 
 @Component({
   selector: 'app-login',
@@ -14,7 +16,8 @@ export class LoginPage implements OnInit {
 
 
   constructor(
-    private router:Router
+    private router:Router,
+    private authService:AuthService
   ) { }
 
   ngOnInit() {
@@ -24,11 +27,18 @@ export class LoginPage implements OnInit {
     })
   }
 
-  login(){}
+  login(){
+    const usuario = this.loginFormGroup.getRawValue() as Pessoa;
+
+    this.authService.login(usuario)
+  }
 
 
 
   cadastre(){
     this.router.navigateByUrl('registro')
   }
+
+  get email(){return this.loginFormGroup.get('email')?.getRawValue}
+  get senha(){return this.loginFormGroup.get('senha')?.getRawValue}
 }

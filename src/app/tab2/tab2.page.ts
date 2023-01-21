@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FirebaseService } from '../services/firebase.service';
 import { Auth } from '@angular/fire/auth';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-tab2',
@@ -11,7 +12,8 @@ export class Tab2Page implements OnInit {
 
   constructor(
     private firebase:FirebaseService,
-    private auth:Auth
+    private authService:AuthService,
+
   ) {}
 
   ngOnInit(): void {
@@ -23,6 +25,10 @@ export class Tab2Page implements OnInit {
       console.log(res)
     });
 
+  }
+
+  logout(){
+    this.authService.logout()
   }
 
 }

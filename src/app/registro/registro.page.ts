@@ -4,6 +4,8 @@ import { FirebaseService } from '../services/firebase.service';
 import { CorreiosService } from '../services/correios.service';
 import { Endereco } from '../models/endereco.model';
 import { Pessoa } from '../models/pessoa.model';
+import { Auth } from '@angular/fire/auth';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-registro',
@@ -18,6 +20,7 @@ export class RegistroPage implements OnInit {
   @ViewChild('cadastroFormDirective') cadastroFormDirective!:FormGroupDirective
 
   constructor(
+    private auth:AuthService,
     private firebaseService:FirebaseService,
     private correiosService:CorreiosService
   ) { }
@@ -59,7 +62,7 @@ export class RegistroPage implements OnInit {
 
   registra(){
     const pessoa = this.cadastroForm.getRawValue() as Pessoa;
-    this.firebaseService.registraUsuario(pessoa).then(
+    this.auth.registraUsuario(pessoa).then(
       res=>{
         if(res.user.uid){
           pessoa.uid = res.user.uid;
