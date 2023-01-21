@@ -1,9 +1,109 @@
-<ion-header>
+<ion-header [translucent]="true" class="ion-no-border">
   <ion-toolbar>
-    <ion-title>registro</ion-title>
+    <ion-title> Contact Details </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content [fullscreen]="true">
+  <form
+    [formGroup]="cadastroForm"
+    #cadastroFormDirective="ngForm"
+    (ngSubmit)="registra()"
 
+  >
+    <ion-list>
+      <ion-item>
+        <ion-input
+          placeholder="nome"
+          inputmode="text"
+          clearInput="true"
+          formControlName="nome"
+          required
+        ></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-input
+          (keyup)="verificaUsername()"
+          placeholder="username"
+          inputmode="text"
+          clearInput="true"
+          formControlName="username"
+          required
+        ></ion-input>
+        <ion-item *ngIf="!validaUserName" color="danger">
+          usuário já existe
+        </ion-item>
+      </ion-item>
+      <ion-item>
+        <ion-input
+          placeholder="senha"
+          inputmode="text"
+          clearInput="true"
+          formControlName="senha"
+          type="password"
+          required
+        ></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-input
+          (keyup)="verificaEmail()"
+          placeholder="e-mail"
+          inputmode="email"
+          clearInput="true"
+          formControlName="email"
+          required
+        ></ion-input>
+        <ion-item *ngIf="!validaEmail" color="danger">
+          e-mail já cadastrado
+        </ion-item>
+      </ion-item>
+      <ion-item-group formGroupName="endereco">
+        <ion-item-divider>
+          <ion-label>Endereço</ion-label>
+        </ion-item-divider>
+        <ion-item>
+          <ion-label position="stacked">CEP</ion-label>
+          <ion-input formControlName="cep" type="text" required (change)="carregaEndereco()"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="stacked">UF</ion-label>
+          <ion-input readonly formControlName="uf" type="text" required maxlength="2" minlength="2"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="stacked">Cidade</ion-label>
+          <ion-input readonly formControlName="localidade" type="text" required></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="stacked">bairro</ion-label>
+          <ion-input readonly formControlName="bairro" type="text" required></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="stacked">Logradouro</ion-label>
+          <ion-input readonly formControlName="logradouro" type="text" required></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="stacked">Número</ion-label>
+          <ion-input formControlName="numero" type="text" required></ion-input>
+        </ion-item>
+
+
+      </ion-item-group>
+    </ion-list>
+
+    <ion-item>
+      <ion-buttons slot="start">
+        <ion-button type="submit" color="primary">Salvar</ion-button>
+      </ion-buttons>
+      <ion-buttons slot="end">
+        <ion-button color="danger" >Delete Contact</ion-button>
+      </ion-buttons>
+    </ion-item>
+  </form>
 </ion-content>
+<!--
+
+
+
+
+category
+ -->
