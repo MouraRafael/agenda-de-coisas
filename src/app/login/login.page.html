@@ -1,9 +1,40 @@
-<ion-header>
+<ion-header [translucent]="true" class="ion-no-border">
   <ion-toolbar>
-    <ion-title>login</ion-title>
+    <ion-title> Bem Vindo! </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content [fullscreen]="true">
+  <form [formGroup]="loginFormGroup" #loginFormGroupDirective="ngForm">
+    <ion-list>
+      <ion-item>
+        <ion-input
+          placeholder="e-mail"
+          inputmode="email"
+          clearInput="true"
+          formControlName="email"
+          required
+        ></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-input
+          placeholder="senha"
+          inputmode="password"
+          clearInput="true"
+          formControlName="senha"
+          required
+          type="password"
+        ></ion-input>
+      </ion-item>
+    </ion-list>
+    <ion-button style="width: 80vw; margin: auto; margin-top: 2rem;" expand="block" size="large" (click)="login()">
+      Login
+    </ion-button>
+    <ion-item class="ion-margin-top ">
+      <ion-note slot="start">Não tem Conta?</ion-note>
+      <ion-note slot="end" color="primary" class="ion-margin-start" (click)="cadastre()"> Cadastre-se</ion-note>
+    </ion-item>
+  </form>
+
 
 </ion-content>
