@@ -3,6 +3,7 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
+  correiosWS: 'http://viacep.com.br/ws',
   firebase: {
     projectId: 'atividade3-141cc',
     appId: '1:713147221696:web:edd1b5726f0a5ad57c4f25',
