@@ -56,7 +56,7 @@ export class Tab1Page implements OnInit {
     if(this.userPersonalData.alunos.length == 0){
       id = 1;
     }else{
-      id = this.userPersonalData.alunos[this.userPersonalData.alunos.length -1].id +1;
+      id = this.userPersonalData.alunos.length;
     }
     aluno.id = id;
 
