@@ -1,13 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { AvatarService } from '../services/avatar.service';
-import { AlertController, LoadingController } from '@ionic/angular';
+
 import { AuthService } from '../services/auth.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { CorreiosService } from '../services/correios.service';
+
 import { FirebaseService } from '../services/firebase.service';
-import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
+
 import { Pessoa } from '../models/pessoa.model';
 import { Auth } from '@angular/fire/auth';
+import { Aluno } from '../models/aluno.model';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-tab1',
@@ -17,12 +19,16 @@ import { Auth } from '@angular/fire/auth';
 export class Tab1Page implements OnInit {
   profile: any = null;
   userPersonalData!:Pessoa;
+
+  aluno!:Aluno;
+  alunoForm!:FormGroup;
+
+
   constructor(
-    private loadingController: LoadingController,
-    private alertController: AlertController,
     private avatarService: AvatarService,
     private firebaseService:FirebaseService,
-    private auth:Auth
+    private auth:Auth,
+    private router:Router
   ) {
     this.avatarService.getUserProfile().subscribe((data) => {
       this.profile = data;
@@ -37,41 +43,37 @@ export class Tab1Page implements OnInit {
     this.firebaseService.encontrarPorId(this.auth.currentUser!.uid).subscribe(res=>{
       this.userPersonalData = res
     })
+
+    this.alunoForm = new FormGroup({
+      nome:new FormControl('',[Validators.required]),
+      observacoes: new FormControl('')
+    })
   }
+  cadastraAluno(){
+    let aluno = this.alunoForm.getRawValue() as Aluno;
+    let id;
 
-
-
-
-
-
-
-
-
-  async changeImage() {
-    const image = await Camera.getPhoto({
-      quality: 90,
-      allowEditing: false,
-      resultType: CameraResultType.Base64,
-      source: CameraSource.Photos,
-    });
-    console.log(image);
-
-    if (image) {
-      const loading = await this.loadingController.create();
-      await loading.present();
-
-      const result = await this.avatarService.uploadImage(image);
-      loading.dismiss();
-
-      if (!result) {
-        const alert = await this.alertController.create({
-          header: 'Upload failed',
-          message: 'There was a problem uploading your avatar.',
-          buttons: ['OK'],
-        });
-        await alert.present();
-      }
+    if(this.userPersonalData.alunos.length == 0){
+      id = 1;
+    }else{
+      id = this.userPersonalData.alunos[this.userPersonalData.alunos.length -1].id +1;
     }
+    aluno.id = id;
+
+    this.userPersonalData.alunos.push(aluno)
+    this.firebaseService.atualizar(this.userPersonalData).then(()=>{
+      this.router.navigateByUrl('home/tabs/tab2');
+    })
+
   }
+
+
+
+
+
+
+
+
+
 
 }

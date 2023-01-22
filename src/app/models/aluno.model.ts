@@ -1,12 +1,12 @@
-export class Aluno{
-  id!:string;
-  nome!:string;
+export interface Aluno{
+  id:number;
+  nome:string;
 
-  notaA!:number;
-  notaB!:number;
-  notaC!:number;
-  notaD!:number;
-
-  observacoes!:string
+  notaA:number;
+  notaB:number;
+  notaC:number;
+  notaD:number;
+  media:number;
+  observacoes:string
 
 }
