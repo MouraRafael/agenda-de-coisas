@@ -6,6 +6,7 @@ import { Endereco } from '../models/endereco.model';
 import { Pessoa } from '../models/pessoa.model';
 import { Auth } from '@angular/fire/auth';
 import { AuthService } from '../services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-registro',
@@ -22,16 +23,16 @@ export class RegistroPage implements OnInit {
   constructor(
     private auth:AuthService,
     private firebaseService:FirebaseService,
-    private correiosService:CorreiosService
+    private correiosService:CorreiosService,
+    private router:Router
   ) { }
 
   ngOnInit() {
     this.cadastroForm = new FormGroup({
-      'username': new FormControl('',[Validators.required]),
-      'senha': new FormControl('',[Validators.required]),
       'nome': new FormControl('',[Validators.required/*,Validators.pattern(/^[a-zA-Z]/),Validators.minLength(6),Validators.maxLength(60)*/]),
-    'email': new FormControl('',[Validators.required/*,Validators.pattern(/^[a-z0-9.]+@[a-z0-9]+\.[a-z]+\.([a-z]+)?$/i)*/]),
-  'cpf': new FormControl('',[Validators.required/*,Validators.pattern(/^\d{3}\.\d{3}\.\d{3}\-\d{2}$/)*/]),
+      'senha': new FormControl('',[Validators.required]),
+      'email': new FormControl('',[Validators.required/*,Validators.pattern(/^[a-z0-9.]+@[a-z0-9]+\.[a-z]+\.([a-z]+)?$/i)*/]),
+      'cpf': new FormControl('',[Validators.required/*,Validators.pattern(/^\d{3}\.\d{3}\.\d{3}\-\d{2}$/)*/]),
       'endereco': new FormGroup({
         'cep': new FormControl('',[Validators.required]),
         'uf': new FormControl('',[Validators.required]),
@@ -67,7 +68,8 @@ export class RegistroPage implements OnInit {
         if(res.user.uid){
           pessoa.id = res.user.uid;
 
-          this.firebaseService.cadastra(pessoa)
+          this.firebaseService.cadastra(pessoa);
+          this.router.navigateByUrl('home')
         }
       }
     );

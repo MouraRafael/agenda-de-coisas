@@ -36,7 +36,7 @@ export class LoginPage implements OnInit {
 
 
   cadastre(){
-    this.router.navigateByUrl('registro')
+    this.router.navigateByUrl('registro',{replaceUrl:true})
   }
 
   get email(){return this.loginFormGroup.get('email')?.getRawValue}

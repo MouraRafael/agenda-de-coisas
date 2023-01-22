@@ -24,15 +24,12 @@
       <ion-item>
         <ion-input
           (keyup)="verificaUsername()"
-          placeholder="username"
+          placeholder="CPF"
           inputmode="text"
           clearInput="true"
-          formControlName="username"
+          formControlName="cpf"
           required
         ></ion-input>
-        <ion-item *ngIf="!validaUserName" color="danger">
-          usuário já existe
-        </ion-item>
       </ion-item>
       <ion-item>
         <ion-input
