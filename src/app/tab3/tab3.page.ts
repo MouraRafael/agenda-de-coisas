@@ -9,6 +9,7 @@ import { Endereco } from '../models/endereco.model';
 import { AlertController, LoadingController } from '@ionic/angular';
 import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
 import { AvatarService } from '../services/avatar.service';
+import { Router } from '@angular/router';
 
 
 
@@ -31,6 +32,7 @@ export class Tab3Page implements OnInit {
     private auth:Auth,
     private firebaseService:FirebaseService,
     private correiosService:CorreiosService,
+    private router:Router
   ) {
     this.avatarService.getUserProfile().subscribe((data) => {
       this.profile = data;
@@ -138,5 +140,12 @@ export class Tab3Page implements OnInit {
         await alert.present();
       }
     }
+  }
+
+  logout(){
+    this.authService.logout().then(()=>{
+      this.router.navigateByUrl('login')
+    })
+
   }
 }

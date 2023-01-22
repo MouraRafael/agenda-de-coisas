@@ -30,7 +30,11 @@ export class LoginPage implements OnInit {
   login(){
     const usuario = this.loginFormGroup.getRawValue() as Pessoa;
 
-    this.authService.login(usuario)
+    this.authService.login(usuario).then(res=>{
+      if(res){
+        this.router.navigateByUrl('home/tabs/tab3')
+      }
+    })
   }
 
 

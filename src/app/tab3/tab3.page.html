@@ -83,10 +83,12 @@
       </ion-list>
 
       <ion-item>
-        <ion-buttons slot="end">
+        <ion-buttons slot="start">
           <ion-button type="submit" color="primary">Salvar</ion-button>
         </ion-buttons>
-
+        <ion-buttons slot="end">
+          <ion-button (click)="logout()" color="danger" >logout</ion-button>
+        </ion-buttons>
       </ion-item>
     </form>
   </ion-content>
