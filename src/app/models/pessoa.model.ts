@@ -10,7 +10,7 @@ export class Pessoa {
   email!:string;
   cpf!:number;
 
-  Alunos!: Aluno[];
+  alunos!: Aluno[];
   endereco!:Endereco;
 
 }

@@ -67,7 +67,7 @@ export class RegistroPage implements OnInit {
       res=>{
         if(res.user.uid){
           pessoa.id = res.user.uid;
-
+          pessoa.alunos = []
           this.firebaseService.cadastra(pessoa);
           this.router.navigateByUrl('login')
         }
