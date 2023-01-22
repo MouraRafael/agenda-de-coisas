@@ -1,7 +1,14 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar>
-    <ion-title>
-      Tab 2
+    <ion-title slot="end">
+      <div class="preview">
+        <ion-avatar>
+          <img *ngIf="profile?.imageUrl; else placeholder_avatar;" [src]="profile.imageUrl" alt="">
+          <ng-template #placeholder_avatar>
+            <ion-icon name="person"></ion-icon>
+          </ng-template>
+        </ion-avatar>
+      </div>
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -12,6 +19,6 @@
       <ion-title size="large">Tab 2</ion-title>
     </ion-toolbar>
   </ion-header>
-  <ion-button (click)="logout()">Logout</ion-button>
+
 
 </ion-content>
