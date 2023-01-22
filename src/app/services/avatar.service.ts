@@ -20,7 +20,7 @@ export class AvatarService {
 
   getUserProfile() {
     const user = this.auth.currentUser;
-    const userDocRef = doc(this.firestore, `pessoas/${user?.uid}`);
+    const userDocRef = doc(this.firestore, `userAvatar/${user?.uid}`);
     return docData(userDocRef);
   }
 
@@ -32,7 +32,7 @@ export class AvatarService {
     try {
       await uploadString(storageRef, cameraFile.base64String!, 'base64');
       const imageUrl = await getDownloadURL(storageRef);
-      const userDocRef = doc(this.firestore, `pessoas/${user?.uid}`);
+      const userDocRef = doc(this.firestore, `userAvatar/${user?.uid}`);
       await setDoc(userDocRef, {
         imageUrl,
       });

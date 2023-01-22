@@ -69,7 +69,7 @@ export class RegistroPage implements OnInit {
           pessoa.id = res.user.uid;
 
           this.firebaseService.cadastra(pessoa);
-          this.router.navigateByUrl('home')
+          this.router.navigateByUrl('login')
         }
       }
     );
