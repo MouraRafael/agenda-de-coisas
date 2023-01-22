@@ -28,8 +28,10 @@ export class FirebaseService {
 
   //FireStore
   cadastra(pessoa: Pessoa): Promise<void>{
-    const document = doc(collection(this.fireStore, NOME_DB));
-    return setDoc(document, pessoa)
+    const document = doc(this.fireStore, NOME_DB, pessoa?.id)
+    const {id, ...data} = pessoa;
+
+    return setDoc(document,data)
   }
 
 

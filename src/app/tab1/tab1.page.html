@@ -13,5 +13,15 @@
     </ion-toolbar>
   </ion-header>
 
+  <div class="preview">
+    <ion-avatar (click)="changeImage()">
+      <img *ngIf="profile?.imageUrl; else placeholder_avatar;" [src]="profile.imageUrl" alt="">
+      <ng-template #placeholder_avatar>
+        <div class="fallback">
+          <p>Select Avatar</p>
+        </div>
+      </ng-template>
+    </ion-avatar>
+  </div>
 
 </ion-content>
