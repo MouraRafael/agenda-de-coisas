@@ -1,4 +1,4 @@
-export class Materia{
+export class Aluno{
   id!:string;
   nome!:string;
 

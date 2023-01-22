@@ -1,5 +1,5 @@
 import { Endereco } from "./endereco.model";
-import { Materia } from "./materia.model";
+import { Aluno } from "./aluno.model";
 
 export class Pessoa {
   uid!:string;
@@ -10,7 +10,7 @@ export class Pessoa {
   email!:string;
   cpf!:number;
 
-  materias!: Materia[];
+  Alunos!: Aluno[];
   endereco!:Endereco;
 
 }
