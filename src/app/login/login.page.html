@@ -15,6 +15,7 @@
           formControlName="email"
           required
         ></ion-input>
+        <ion-note slot="error" *ngIf="usuarioNaoEncontrado">e-mail ou senha não encontrados</ion-note>
       </ion-item>
       <ion-item>
         <ion-input

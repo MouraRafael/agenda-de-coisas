@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Auth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from '@angular/fire/auth';
+import { Auth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut,sendPasswordResetEmail } from '@angular/fire/auth';
 import { Pessoa } from '../models/pessoa.model';
 
 @Injectable({
@@ -30,6 +30,12 @@ export class AuthService {
     } catch (e) {
       return null;
     }
+  }
+
+  async esqueciSenha(email:string){
+    const mail = sendPasswordResetEmail(this.auth,email);
+    return mail;
+
   }
 
   logout() {

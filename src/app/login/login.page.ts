@@ -3,6 +3,7 @@ import { FormControl, FormGroup, FormGroupDirective, Validators } from '@angular
 import { Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 import { Pessoa } from '../models/pessoa.model';
+import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-login',
@@ -11,13 +12,15 @@ import { Pessoa } from '../models/pessoa.model';
 })
 export class LoginPage implements OnInit {
   loginFormGroup!:FormGroup
+  usuarioNaoEncontrado = false;
 
   @ViewChild('loginFormGroupDirective') loginFormGroupDirective!:FormGroupDirective
 
 
   constructor(
     private router:Router,
-    private authService:AuthService
+    private authService:AuthService,
+    private alertController:AlertController
   ) { }
 
   ngOnInit() {
@@ -34,9 +37,21 @@ export class LoginPage implements OnInit {
       if(res){
         this.router.navigateByUrl('home/tabs/tab3')
       }
+    }).catch(()=>{
+      this.usuarioNaoEncontrado = true
+      this.alerta();
     })
   }
 
+async alerta(){
+  const alert = await this.alertController.create({
+    header:'Houve um erro ao realizar o login',
+    message: 'Usuário e/ou senha não encontrados',
+    buttons:['OK']
+
+  })
+  return await alert.present()
+}
 
 
   cadastre(){
