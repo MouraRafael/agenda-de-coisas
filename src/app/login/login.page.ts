@@ -45,8 +45,8 @@ export class LoginPage implements OnInit {
 
 async alerta(){
   const alert = await this.alertController.create({
-    header:'Houve um erro ao realizar o login',
-    message: 'Usuário e/ou senha não encontrados',
+    header:'Acesso Negado',
+    message: `Houve um erro ao realizar o login:<br><br> Usuário e/ou senha não encontrados`,
     buttons:['OK']
 
   })
