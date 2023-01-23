@@ -1,0 +1,45 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button color="medium" (click)="fechar()">Fechar</ion-button>
+    </ion-buttons>
+    <ion-title>{{aluno.nome}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <form [formGroup]="alunoForm">
+    <ion-item-group>
+      <ion-item-divider>
+        <ion-label>Informações do Fornecedor</ion-label>
+      </ion-item-divider>
+      <ion-item>
+        <ion-label position="stacked">1º Bimestre</ion-label>
+        <ion-input formControlName="notaA" min="0.0" step="0.01" max="10.0" type="number" required></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="stacked">2º Bimestre</ion-label>
+        <ion-input formControlName="notaB" min="0.0" step="0.01" max="10.0" type="number" required></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="stacked">3º Bimestre</ion-label>
+        <ion-input formControlName="notaC" min="0.0" step="0.01" max="10.0" type="number" placeholder="(xx) xxxx-xxxx" required></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="stacked">4º Bimestre</ion-label>
+        <ion-input formControlName="notaD" min="0.0" step="0.01" max="10.0" type="number" placeholder="(xx) xxxx-xxxx" required></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Observações</ion-label>
+        <ion-textarea
+          [autoGrow]="true"
+          placeholder="observacoes"
+          inputmode="text"
+          clearInput="true"
+          formControlName="observacoes"
+          required
+        ></ion-textarea>
+      </ion-item>
+      <ion-button (click)="editar()">editar</ion-button>
+    </ion-item-group>
+  </form>
+</ion-content>

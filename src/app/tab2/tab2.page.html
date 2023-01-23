@@ -25,7 +25,7 @@
     </ion-toolbar>
   </ion-header>
 
-  <ion-accordion-group>
+  <ion-accordion-group *ngIf="userPersonalData">
     <ion-accordion *ngFor="let aluno of userPersonalData.alunos ">
       <ion-item slot="header" color="dark">
         <ion-label
