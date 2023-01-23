@@ -34,7 +34,7 @@ export class RegistroPage implements OnInit {
   ngOnInit() {
     this.cadastroForm = new FormGroup({
       'nome': new FormControl('',[Validators.required,Validators.pattern(/^[a-zA-Z]/),Validators.minLength(6),Validators.maxLength(60)]),
-      'senha': new FormControl('',[Validators.required/*,Validators.pattern(/(?=^.{6,10}$)(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&amp;*()_+}{&quot;:;'?/&gt;.&lt;,])(?!.*\s).*$/)*/]),
+      'senha': new FormControl('',[Validators.required,Validators.pattern(/(?=^.{6,10}$)(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&amp;*()_+}{&quot;:;'?/&gt;.&lt;,])(?!.*\s).*$/)]),
       'confsenha': new FormControl('',[Validators.required]),
       'email': new FormControl('',[Validators.required,Validators.email]),
       'cpf': new FormControl('',[Validators.required,Validators.pattern(/^(([0-9]{3}.[0-9]{3}.[0-9]{3}-[0-9]{2})|([0-9]{11}))$/)]),
