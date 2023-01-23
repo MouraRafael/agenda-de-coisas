@@ -13,6 +13,7 @@
   >
     <ion-list>
       <ion-item>
+        <ion-label position="stacked">Nome</ion-label>
         <ion-input
           placeholder="nome"
           inputmode="text"
@@ -22,8 +23,8 @@
         ></ion-input>
       </ion-item>
       <ion-item>
+        <ion-label position="stacked">CPF</ion-label>
         <ion-input
-          (keyup)="verificaUsername()"
           placeholder="CPF"
           inputmode="text"
           clearInput="true"
@@ -32,7 +33,9 @@
         ></ion-input>
       </ion-item>
       <ion-item>
+        <ion-label position="stacked">Senha</ion-label>
         <ion-input
+          (keyup)="verificaSenha()"
           placeholder="senha"
           inputmode="text"
           clearInput="true"
@@ -40,6 +43,21 @@
           type="password"
           required
         ></ion-input>
+        <ion-note slot="error" *ngIf="(senha!.dirty || senha!.touched) && senha!.errors">Senha Inválida</ion-note>
+        <ion-note slot="error" *ngIf="!statusSenha">As senhas não são iguais</ion-note>
+      </ion-item>
+      <ion-item>
+        <ion-label position="stacked">Confirme sua Senha</ion-label>
+        <ion-input
+          (keyup)="verificaSenha()"
+          placeholder="Digite novamente sua senha"
+          inputmode="text"
+          clearInput="true"
+          formControlName="confsenha"
+          type="password"
+          required
+        ></ion-input>
+        <ion-note slot="error" *ngIf="(senha!.dirty || senha!.touched) && senha!.errors">Senha Inválida</ion-note>
       </ion-item>
       <ion-item>
         <ion-input
@@ -56,26 +74,26 @@
       </ion-item>
       <ion-item-group formGroupName="endereco">
         <ion-item-divider>
-          <ion-label>Endereço</ion-label>
+          <ion-label position="stacked">Endereço</ion-label>
         </ion-item-divider>
         <ion-item>
-          <ion-label position="stacked">CEP</ion-label>
+          <ion-label position="stacked" position="stacked">CEP</ion-label>
           <ion-input formControlName="cep" type="text" required (change)="carregaEndereco()"></ion-input>
         </ion-item>
         <ion-item>
-          <ion-label position="stacked">UF</ion-label>
+          <ion-label position="stacked" position="stacked">UF</ion-label>
           <ion-input readonly formControlName="uf" type="text" required maxlength="2" minlength="2"></ion-input>
         </ion-item>
         <ion-item>
-          <ion-label position="stacked">Cidade</ion-label>
+          <ion-label position="stacked" position="stacked">Cidade</ion-label>
           <ion-input readonly formControlName="localidade" type="text" required></ion-input>
         </ion-item>
         <ion-item>
-          <ion-label position="stacked">bairro</ion-label>
+          <ion-label position="stacked" position="stacked">bairro</ion-label>
           <ion-input readonly formControlName="bairro" type="text" required></ion-input>
         </ion-item>
         <ion-item>
-          <ion-label position="stacked">Logradouro</ion-label>
+          <ion-label position="stacked" position="stacked">Logradouro</ion-label>
           <ion-input readonly formControlName="logradouro" type="text" required></ion-input>
         </ion-item>
         <ion-item>
@@ -89,11 +107,9 @@
 
     <ion-item>
       <ion-buttons slot="start">
-        <ion-button type="submit" color="primary">Salvar</ion-button>
+        <ion-button type="submit" color="primary" [disabled]="!statusSenha || cadastroForm.invalid">Salvar</ion-button>
       </ion-buttons>
-      <ion-buttons slot="end">
-        <ion-button color="danger" >Delete Contact</ion-button>
-      </ion-buttons>
+
     </ion-item>
   </form>
 </ion-content>
