@@ -37,16 +37,22 @@ export class LoginPage implements OnInit {
       if(res){
         this.router.navigateByUrl('home/tabs/tab3')
       }
-    }).catch(()=>{
-      this.usuarioNaoEncontrado = true
-      this.alerta();
+    }).catch((err)=>{
+      console.log(err)
+
+      if(err == 'FirebaseError: Firebase: Error (auth/user-disabled).') this.alerta('Conta desativada');
+      if(err == 'FirebaseError: Firebase: Error (auth/invalid-email).'){
+        this.usuarioNaoEncontrado = true;
+        this.alerta('email e/ou senha inválidos')
+      }
+
     })
   }
 
-async alerta(){
+async alerta(mensagem:string){
   const alert = await this.alertController.create({
     header:'Acesso Negado',
-    message: `Houve um erro ao realizar o login:<br><br> Usuário e/ou senha não encontrados`,
+    message: `Houve um erro ao realizar o login:<br><br> ${mensagem}`,
     buttons:['OK']
 
   })
