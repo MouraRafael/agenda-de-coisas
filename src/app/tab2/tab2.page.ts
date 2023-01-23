@@ -6,6 +6,7 @@ import { Pessoa } from '../models/pessoa.model';
 import { AvatarService } from '../services/avatar.service';
 import { ModalController } from '@ionic/angular';
 import { EditanotasComponent } from '../modal/editanotas/editanotas.component';
+import { Aluno } from '../models/aluno.model';
 
 
 @Component({
@@ -66,6 +67,27 @@ export class Tab2Page implements OnInit {
 
       }
      })
+  }
+
+  mostraMedia(aluno:Aluno){
+
+    let notas= []
+    let resultado:number = 0;
+
+    if(aluno.notaA) notas.push(aluno.notaA)
+    if(aluno.notaB) notas.push(aluno.notaB)
+    if(aluno.notaC) notas.push(aluno.notaC)
+    if(aluno.notaD) notas.push(aluno.notaD)
+
+    if(notas.length !== 0){
+      notas.forEach((i) =>{
+        resultado+=i
+      } )
+      resultado/=notas.length
+
+    }
+
+    return resultado
   }
 
 }
