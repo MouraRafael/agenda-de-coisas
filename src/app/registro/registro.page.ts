@@ -7,6 +7,7 @@ import { Pessoa } from '../models/pessoa.model';
 import { Auth } from '@angular/fire/auth';
 import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
+import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-registro',
@@ -26,13 +27,14 @@ export class RegistroPage implements OnInit {
     private auth:AuthService,
     private firebaseService:FirebaseService,
     private correiosService:CorreiosService,
-    private router:Router
+    private router:Router,
+    private alertController:AlertController
   ) { }
 
   ngOnInit() {
     this.cadastroForm = new FormGroup({
       'nome': new FormControl('',[Validators.required,Validators.pattern(/^[a-zA-Z]/),Validators.minLength(6),Validators.maxLength(60)]),
-      'senha': new FormControl('',[Validators.required,Validators.pattern(/(?=^.{6,10}$)(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&amp;*()_+}{&quot;:;'?/&gt;.&lt;,])(?!.*\s).*$/)]),
+      'senha': new FormControl('',[Validators.required/*,Validators.pattern(/(?=^.{6,10}$)(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&amp;*()_+}{&quot;:;'?/&gt;.&lt;,])(?!.*\s).*$/)*/]),
       'confsenha': new FormControl('',[Validators.required]),
       'email': new FormControl('',[Validators.required,Validators.email]),
       'cpf': new FormControl('',[Validators.required,Validators.pattern(/^(([0-9]{3}.[0-9]{3}.[0-9]{3}-[0-9]{2})|([0-9]{11}))$/)]),
@@ -75,11 +77,23 @@ export class RegistroPage implements OnInit {
           this.router.navigateByUrl('login')
         }
       }
-    );
+    ).catch((err)=>{
+      console.error(`Erro ao registrar: ${err}`)
+      this.alerta();
+    });
 
   }
-  verificaUsername(){}
-  verificaEmail(){}
+
+  async alerta(){
+    const alert = await this.alertController.create({
+      header:'Erro ao cadastrar',
+      message: 'e-mail já cadastrado',
+      buttons:['OK']
+
+    })
+    return await alert.present()
+  }
+
 
   verificaSenha(){
     this.statusSenha = (this.senha?.getRawValue() == this.confsenha?.getRawValue()) ? true : false;
@@ -91,5 +105,5 @@ export class RegistroPage implements OnInit {
   get senha(){return this.cadastroForm.get('senha')}
   get confsenha(){return this.cadastroForm.get('confsenha')}
 
-  
+
 }
