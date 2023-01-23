@@ -1,0 +1,25 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button color="medium" (click)="fechar()">Fechar</ion-button>
+    </ion-buttons>
+    <ion-title>Esqueci minha Senha</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <form [formGroup]="senhaEsquecidaForm">
+    <ion-item-divider>
+      <ion-label position="stacked">E-Mail</ion-label>
+    </ion-item-divider>
+    <ion-item>
+      <ion-label position="stacked">Digite seu e-mail</ion-label>
+      <ion-input formControlName="email" type="text" required></ion-input>
+    </ion-item>
+    <ion-button expand="full" (click)="recuperarEmail()">Enviar e-mail de recuperação</ion-button>
+
+  </form>
+</ion-content>
+
+

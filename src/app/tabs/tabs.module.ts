@@ -7,6 +7,7 @@ import { TabsPageRoutingModule } from './tabs-routing.module';
 
 import { TabsPage } from './tabs.page';
 import { EditanotasModule } from '../modal/editanotas/editanotas.module';
+import { SenhaEsquecidaModule } from '../modal/senha-esquecida/senha-esquecida.module';
 
 @NgModule({
   imports: [
@@ -14,7 +15,8 @@ import { EditanotasModule } from '../modal/editanotas/editanotas.module';
     CommonModule,
     FormsModule,
     TabsPageRoutingModule,
-    EditanotasModule
+    EditanotasModule,
+    SenhaEsquecidaModule
   ],
   declarations: [TabsPage]
 })

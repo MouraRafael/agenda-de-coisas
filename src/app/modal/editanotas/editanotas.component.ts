@@ -19,7 +19,7 @@ export class EditanotasComponent implements OnInit {
 
   constructor(
     private modalCtrl:ModalController,
-    private auth:Auth,
+
     private firebaseService:FirebaseService
   ) { }
 

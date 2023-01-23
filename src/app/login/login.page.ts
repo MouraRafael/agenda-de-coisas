@@ -3,7 +3,8 @@ import { FormControl, FormGroup, FormGroupDirective, Validators } from '@angular
 import { Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 import { Pessoa } from '../models/pessoa.model';
-import { AlertController } from '@ionic/angular';
+import { AlertController, ModalController } from '@ionic/angular';
+import { SenhaEsquecidaComponent } from '../modal/senha-esquecida/senha-esquecida.component';
 
 @Component({
   selector: 'app-login',
@@ -20,7 +21,8 @@ export class LoginPage implements OnInit {
   constructor(
     private router:Router,
     private authService:AuthService,
-    private alertController:AlertController
+    private alertController:AlertController,
+    private modalCtrl:ModalController
   ) { }
 
   ngOnInit() {
@@ -49,15 +51,23 @@ export class LoginPage implements OnInit {
     })
   }
 
-async alerta(mensagem:string){
-  const alert = await this.alertController.create({
-    header:'Acesso Negado',
-    message: `Houve um erro ao realizar o login:<br><br> ${mensagem}`,
-    buttons:['OK']
+  async alerta(mensagem:string){
+    const alert = await this.alertController.create({
+      header:'Acesso Negado',
+      message: `Houve um erro ao realizar o login:<br><br> ${mensagem}`,
+      buttons:['OK']
 
-  })
-  return await alert.present()
-}
+    })
+    return await alert.present()
+  }
+
+  async esqueciSenha(){
+    const modal = await this.modalCtrl.create({
+      component:SenhaEsquecidaComponent
+    })
+
+    return await modal.present()
+  }
 
 
   cadastre(){
