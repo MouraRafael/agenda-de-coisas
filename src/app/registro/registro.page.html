@@ -109,7 +109,9 @@
       <ion-buttons slot="start">
         <ion-button type="submit" color="primary" [disabled]="!statusSenha || cadastroForm.invalid">Salvar</ion-button>
       </ion-buttons>
-
+      <ion-buttons slot="end">
+        <ion-button (click)="voltar()" color="danger" fill="outline">Voltar</ion-button>
+      </ion-buttons>
     </ion-item>
   </form>
 </ion-content>

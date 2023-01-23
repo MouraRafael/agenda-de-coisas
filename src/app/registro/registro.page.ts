@@ -100,6 +100,9 @@ export class RegistroPage implements OnInit {
     console.log(this.statusSenha)
   }
 
+  voltar(){
+    this.router.navigateByUrl('login')
+  }
 
 
   get senha(){return this.cadastroForm.get('senha')}
