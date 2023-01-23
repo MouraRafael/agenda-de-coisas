@@ -17,6 +17,8 @@ export class RegistroPage implements OnInit {
   cadastroForm!:FormGroup
   validaUserName = true;
   validaEmail = true;
+  statusSenha = false;
+
 
   @ViewChild('cadastroFormDirective') cadastroFormDirective!:FormGroupDirective
 
@@ -29,10 +31,11 @@ export class RegistroPage implements OnInit {
 
   ngOnInit() {
     this.cadastroForm = new FormGroup({
-      'nome': new FormControl('',[Validators.required/*,Validators.pattern(/^[a-zA-Z]/),Validators.minLength(6),Validators.maxLength(60)*/]),
-      'senha': new FormControl('',[Validators.required]),
-      'email': new FormControl('',[Validators.required/*,Validators.pattern(/^[a-z0-9.]+@[a-z0-9]+\.[a-z]+\.([a-z]+)?$/i)*/]),
-      'cpf': new FormControl('',[Validators.required/*,Validators.pattern(/^\d{3}\.\d{3}\.\d{3}\-\d{2}$/)*/]),
+      'nome': new FormControl('',[Validators.required,Validators.pattern(/^[a-zA-Z]/),Validators.minLength(6),Validators.maxLength(60)]),
+      'senha': new FormControl('',[Validators.required,Validators.pattern(/(?=^.{6,10}$)(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&amp;*()_+}{&quot;:;'?/&gt;.&lt;,])(?!.*\s).*$/)]),
+      'confsenha': new FormControl('',[Validators.required]),
+      'email': new FormControl('',[Validators.required,Validators.email]),
+      'cpf': new FormControl('',[Validators.required,Validators.pattern(/^(([0-9]{3}.[0-9]{3}.[0-9]{3}-[0-9]{2})|([0-9]{11}))$/)]),
       'endereco': new FormGroup({
         'cep': new FormControl('',[Validators.required]),
         'uf': new FormControl('',[Validators.required]),
@@ -78,4 +81,15 @@ export class RegistroPage implements OnInit {
   verificaUsername(){}
   verificaEmail(){}
 
+  verificaSenha(){
+    this.statusSenha = (this.senha?.getRawValue() == this.confsenha?.getRawValue()) ? true : false;
+    console.log(this.statusSenha)
+  }
+
+
+
+  get senha(){return this.cadastroForm.get('senha')}
+  get confsenha(){return this.cadastroForm.get('confsenha')}
+
+  
 }
