@@ -45,7 +45,7 @@ export class Tab2Page implements OnInit {
       component:EditanotasComponent,
       componentProps:{
         'aluno':aluno,
-        'userId': this.userPersonalData.id
+        'pessoa': this.userPersonalData
       }
     })
     modal.onWillDismiss().then(

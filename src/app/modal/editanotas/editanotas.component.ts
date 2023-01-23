@@ -13,7 +13,7 @@ import { FirebaseService } from 'src/app/services/firebase.service';
 })
 export class EditanotasComponent implements OnInit {
   @Input() aluno!:Aluno
-  @Input() userId!:string
+  @Input() pessoa!:Pessoa
   alunoForm!:FormGroup
 
 
@@ -46,16 +46,15 @@ export class EditanotasComponent implements OnInit {
     this.aluno.notaD = alunoEdita.notaD
 
 
-    this.firebaseService.encontrarPorId(this.userId).subscribe(res=>{
-      const pessoa = res;
-      //console.log(pessoa.alunos)
-      pessoa.alunos = pessoa.alunos.filter(aluno => aluno.id !== this.aluno.id)
-      //console.log(pessoa.alunos)
-      pessoa.alunos.push(this.aluno)
-      //console.log(pessoa.alunos)
-      this.firebaseService.atualizar(pessoa)
 
-    })
+      //console.log(pessoa.alunos)
+      this.pessoa.alunos = this.pessoa.alunos.filter(aluno => aluno.id !== this.aluno.id)
+      //console.log(pessoa.alunos)
+      this.pessoa.alunos.push(this.aluno)
+      //console.log(pessoa.alunos)
+      this.firebaseService.atualizar(this.pessoa)
+
+    this.fechar()
 
   }
 }
