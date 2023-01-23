@@ -53,9 +53,7 @@ export class EditanotasComponent implements OnInit {
       //console.log(pessoa.alunos)
       pessoa.alunos.push(this.aluno)
       //console.log(pessoa.alunos)
-      this.firebaseService.atualizar(pessoa).then(()=>{
-
-      })
+      this.firebaseService.atualizar(pessoa)
 
     })
 
