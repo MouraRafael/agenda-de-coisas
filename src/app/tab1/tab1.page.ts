@@ -52,6 +52,7 @@ export class Tab1Page implements OnInit {
   cadastraAluno(){
     let aluno = this.alunoForm.getRawValue() as Aluno;
     let id;
+    if(!this.userPersonalData.alunos) this.userPersonalData.alunos = [];
 
     if(this.userPersonalData.alunos.length == 0){
       id = 1;
