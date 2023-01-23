@@ -57,4 +57,9 @@ export class EditanotasComponent implements OnInit {
     this.fechar()
 
   }
+
+  excluir(){
+    this.pessoa.alunos = this.pessoa.alunos.filter(aluno => aluno.id !== this.aluno.id);
+    this.firebaseService.atualizar(this.pessoa)
+  }
 }
